@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ML Algorithm Framework | Vijay Sai Kilari</title>
+  <meta name="description" content="An interactive framework classifying twelve machine learning algorithms by learning style and application domain: tabular data, computer vision, NLP, and generative AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../../">VSK<span>.</span></a>
+      <nav class="topnav">
+        <a href="#tree">Framework</a>
+        <a href="#matrix">Domain Map</a>
+        <a href="#cards">Algorithms</a>
+        <a href="#connections">Connections</a>
+        <a href="#process">Classification</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- intro -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="ghost" aria-hidden="true">01</div>
+      <div class="crumbs"><a href="../../">&larr; All artifacts</a></div>
+      <p class="eyebrow">Artifact 01 &middot; Machine Learning Foundations</p>
+      <h1>The ML Algorithm Framework</h1>
+      <p class="lead">
+        Twelve machine learning algorithms, sorted by how they learn and where they are actually used.
+        I built this to answer a question I kept running into at work: when a problem shows up, which family of
+        models even makes sense to look at? Click any algorithm in the framework, the domain map, or the
+        connections section to jump to its full breakdown.
+      </p>
+      <div class="stats">
+        <div class="stat"><b>12</b><span>algorithms classified</span></div>
+        <div class="stat"><b>2</b><span>learning styles</span></div>
+        <div class="stat"><b>4</b><span>application domains</span></div>
+        <div class="stat"><b>7</b><span>relationship threads</span></div>
+      </div>
+      <div class="legend" aria-label="Legend">
+        <span class="item"><span class="dot tab"></span>Tabular Data</span>
+        <span class="item"><span class="dot cv"></span>Computer Vision</span>
+        <span class="item"><span class="dot nlp"></span>NLP</span>
+        <span class="item"><span class="dot gen"></span>Generative AI</span>
+        <span class="item">Filled = primary domain &middot; Ring = secondary domain</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. concept tree -->
+  <section class="section" id="tree" style="padding-top: 32px;">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Layer 1 &middot; Learning Style</p>
+        <h2><span class="secnum">01</span>The framework at a glance</h2>
+        <p>
+          The first split is the one that matters most when choosing a model: does the training data come with
+          labels or not? From there, each branch breaks into families of algorithms that work in similar ways.
+          The dots on each algorithm show its domains, which the next section maps in detail.
+        </p>
+      </div>
+      <div class="tree" id="tree-mount"></div>
+    </div>
+  </section>
+
+  <!-- 2. domain matrix -->
+  <section class="section" id="matrix" style="background: #EEF3EF;">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Layer 2 &middot; Application Domain</p>
+        <h2><span class="secnum">02</span>Domain map</h2>
+        <p>
+          Each row is an algorithm and each column is one of the four domains. A filled circle marks the domain an
+          algorithm was built for or is mainly used in. A ring marks a domain where it shows up regularly but is not
+          the first choice.
+        </p>
+      </div>
+      <div class="matrix-wrap"><table class="matrix" id="matrix-mount"></table></div>
+      <p class="matrix-insight">
+        <strong>What the map shows:</strong> the classical models stack up in the tabular column, while the deep
+        learning models spread across several domains. Generative AI is the clearest pattern of all. Every model that has generative AI as its
+        primary domain learns without human labels, which is a big reason these models could scale so fast, since
+        they can train on raw images and text without anyone labeling it first.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. algorithm cards -->
+  <section class="section" id="cards">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Layer 3 &middot; Detail</p>
+        <h2><span class="secnum">03</span>The twelve algorithms</h2>
+        <p>
+          Each card gives the learning type, the domains, a short explanation of how the algorithm works, and real
+          use cases. Where an algorithm connects to my own work in automotive technical support or data
+          engineering, I added a note on that too. Use the filters to narrow the view.
+        </p>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="cards" id="cards-mount"></div>
+    </div>
+  </section>
+
+  <!-- 4. relationships -->
+  <section class="section" id="connections" style="background: #EEF3EF;">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Layer 4 &middot; Relationships</p>
+        <h2><span class="secnum">04</span>How they connect</h2>
+        <p>
+          These algorithms did not appear in isolation. Many of them extend, fix, or reuse an earlier idea. Each
+          thread below follows one of those connections, with the arrow label explaining what changed from one
+          model to the next.
+        </p>
+      </div>
+      <div class="threads" id="threads-mount"></div>
+    </div>
+  </section>
+
+  <!-- 5. classification process -->
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Method</p>
+        <h2><span class="secnum">05</span>How I classified these</h2>
+      </div>
+      <div class="process">
+        <aside class="steps">
+          <div class="step"><em>Question 1</em><b>Where does the training signal come from?</b><span>Human labels, or the data itself. This decides the learning style.</span></div>
+          <div class="step"><em>Question 2</em><b>What data was it designed for?</b><span>Rows and columns, images, text, or creating new content. This decides the primary domain.</span></div>
+          <div class="step"><em>Question 3</em><b>Where else does it show up in practice?</b><span>Regular use outside the home domain becomes a secondary domain.</span></div>
+          <div class="step"><em>Question 4</em><b>What does it build on?</b><span>The shared ideas behind each model became the relationship threads.</span></div>
+        </aside>
+        <div class="prose">
+          <h3>Choosing the categories</h3>
+          <p>
+            The assignment gave me two learning styles and four domains, so I treated them as two separate layers
+            instead of trying to force everything into one list. Learning style describes how a model is trained,
+            while domain describes what kind of problem it solves. Keeping those apart is what makes the framework
+            useful, because two models can learn the same way and still belong to completely different domains,
+            like XGBoost and CNNs, which are both supervised.
+          </p>
+          <p>
+            For learning style, I sorted by the source of the training signal rather than by the task. If a model
+            needs a person to supply the correct answer for each example, it went under supervised. If it learns
+            only from the raw data, it went under unsupervised. For domains, I separated a primary domain from
+            secondary ones. Almost any model can be bent to fit any data type, so marking everything as
+            "used in all four" would have been technically defensible but useless for choosing a model.
+          </p>
+
+          <h3>The edge cases I had to decide</h3>
+          <div class="edge">
+            <b>Self supervised models.</b> Transformers like GPT and diffusion models do not fit cleanly into
+            either bucket. They train on unlabeled data, but they create their own targets, such as the next word
+            or the noise that was added to an image. I placed them under the unsupervised branch, since no human
+            labeling is involved, but gave them their own dashed group so the distinction stays visible.
+          </div>
+          <div class="edge">
+            <b>Transformers after pretraining.</b> Once a transformer is fine tuned on labeled data, that stage is
+            supervised. I classified it by its pretraining stage, because that is where nearly all of its
+            knowledge comes from, and I noted the fine tuning step on its card.
+          </div>
+          <div class="edge">
+            <b>GANs and the discriminator.</b> A GAN's discriminator technically learns a real versus fake label,
+            which looks supervised at first. Those labels come from the training setup, not from a person, so the
+            model as a whole stays unsupervised.
+          </div>
+          <div class="edge">
+            <b>CNNs and generative AI.</b> I marked generative AI as a secondary domain for CNNs because
+            convolution layers sit inside most image generators, even though a CNN on its own is a classifier.
+          </div>
+
+          <h3>What the sorting showed me</h3>
+          <p>
+            Once everything was placed, a pattern showed up that I did not expect going in. The learning style
+            and the domain are closely tied. Supervised models dominate tabular data because businesses already
+            have labeled history, like past fraud cases or past sales. Generative AI sits almost entirely on the
+            unsupervised side because there is far more unlabeled content in the world than labeled content.
+            That pushed me to think about classification less as a list of facts and more as a reflection of what
+            data is actually available for a problem.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- references -->
+  <section class="section" style="padding-top: 8px;">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom: 18px;">
+        <p class="eyebrow">Sources</p>
+        <h2 style="font-size: 26px;">Key references</h2>
+      </div>
+      <div class="refs">
+        <p>Breiman, L. (2001). Random forests. <em>Machine Learning, 45</em>(1), 5-32. https://doi.org/10.1023/A:1010933404324</p>
+        <p>Chen, T., &amp; Guestrin, C. (2016). XGBoost: A scalable tree boosting system. In <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em> (pp. 785-794). https://doi.org/10.1145/2939672.2939785</p>
+        <p>Cortes, C., &amp; Vapnik, V. (1995). Support-vector networks. <em>Machine Learning, 20</em>(3), 273-297. https://doi.org/10.1007/BF00994018</p>
+        <p>Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A., &amp; Bengio, Y. (2014). Generative adversarial nets. <em>Advances in Neural Information Processing Systems, 27</em>.</p>
+        <p>Ho, J., Jain, A., &amp; Abbeel, P. (2020). Denoising diffusion probabilistic models. <em>Advances in Neural Information Processing Systems, 33</em>.</p>
+        <p>Hochreiter, S., &amp; Schmidhuber, J. (1997). Long short-term memory. <em>Neural Computation, 9</em>(8), 1735-1780. https://doi.org/10.1162/neco.1997.9.8.1735</p>
+        <p>Kingma, D. P., &amp; Welling, M. (2013). <em>Auto-encoding variational Bayes</em>. arXiv. https://arxiv.org/abs/1312.6114</p>
+        <p>LeCun, Y., Bottou, L., Bengio, Y., &amp; Haffner, P. (1998). Gradient-based learning applied to document recognition. <em>Proceedings of the IEEE, 86</em>(11), 2278-2324. https://doi.org/10.1109/5.726791</p>
+        <p>Rombach, R., Blattmann, A., Lorenz, D., Esser, P., &amp; Ommer, B. (2022). High-resolution image synthesis with latent diffusion models. In <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em> (pp. 10684-10695).</p>
+        <p>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, &#321;., &amp; Polosukhin, I. (2017). Attention is all you need. <em>Advances in Neural Information Processing Systems, 30</em>.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div>&copy; 2026 Vijay Sai Kilari &middot; Applied ML Portfolio &middot; Artifact 01</div>
+      <div class="links">
+        <a href="../../">All Artifacts</a>
+        <a href="https://omsairamkvs99.github.io/">Main Portfolio</a>
+        <a href="https://github.com/omsairamkvs99">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

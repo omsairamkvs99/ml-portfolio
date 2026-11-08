@@ -19,11 +19,12 @@ const ARTIFACTS = [
   {
     number: "02",
     week: "Week 2",
-    category: "Coming soon",
-    title: "Next artifact in progress",
-    summary: "This space will hold the next weekly artifact once it is complete.",
-    tools: [],
-    link: "",
-    status: "upcoming"
+    category: "Deep Learning Foundations",
+    title: "Inside a Neural Network: An Interactive Slide Deck",
+    summary:
+      "A 13 slide interactive deck that explains layers, neurons, weights, activation functions, loss functions, and optimization, with an animated network diagram and results from my own TensorFlow Playground training runs.",
+    tools: ["HTML", "CSS", "JavaScript", "SVG", "TensorFlow Playground"],
+    link: "artifacts/02-neural-network-components/",
+    status: "live"
   }
 ];

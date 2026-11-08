@@ -1,0 +1,152 @@
+/* Artifact 02: Neural network components slide deck (self contained) */
+:root {
+  --forest: #1F2E2A;
+  --forest-2: #2C4039;
+  --sage: #84B59F;
+  --euc: #69A297;
+  --mist: #DCE8E1;
+  --paper: #F5F2EB;
+  --card: #FFFFFF;
+  --ink: #1F2E2A;
+  --soft: #4E5F59;
+  --line: #D5DDD7;
+  --orange: #E8963A;
+  --blue: #4F7896;
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: #121a17; color: var(--ink); font-family: var(--sans);
+  overflow: hidden; -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- chrome ---------- */
+.bar {
+  position: fixed; left: 0; right: 0; top: 0; height: 48px; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 0 16px; color: #C9D8D0; font-size: 13px; background: #121a17;
+}
+.bar a { color: var(--sage); text-decoration: none; font-weight: 500; }
+.bar a:hover { text-decoration: underline; }
+.bar .title { font-family: var(--serif); font-size: 15px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar .tools { display: flex; gap: 8px; align-items: center; }
+.bar button, .nav button {
+  font: inherit; font-size: 13px; color: #fff; background: #24342f; border: 1px solid #355047;
+  border-radius: 8px; padding: 6px 12px; cursor: pointer;
+}
+.bar button:hover, .nav button:hover { background: #2f453e; }
+.nav {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 52px; z-index: 10;
+  display: flex; align-items: center; justify-content: center; gap: 14px; color: #C9D8D0; font-size: 13px;
+  font-family: var(--mono); background: #121a17;
+}
+.progress { position: fixed; left: 0; bottom: 52px; height: 3px; background: var(--sage); z-index: 11; transition: width .3s; }
+
+/* ---------- stage ---------- */
+.viewport { position: fixed; top: 48px; bottom: 55px; left: 0; right: 0; display: grid; place-items: center; }
+.stage { width: 1280px; height: 720px; position: relative; transform-origin: center center; flex: none; }
+.slide {
+  position: absolute; inset: 0; background: var(--paper); border-radius: 6px; overflow: hidden;
+  padding: 56px 72px; display: none; box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+.slide.active { display: block; animation: fade .35s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.ghost {
+  position: absolute; right: 36px; top: 4px; font-family: var(--serif); font-weight: 700;
+  font-size: 150px; line-height: 1; opacity: .8; color: transparent; -webkit-text-stroke: 1.5px #D9E3DC;
+  pointer-events: none; user-select: none;
+}
+.eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--euc); margin: 0 0 10px; }
+h1, h2, h3 { font-family: var(--serif); color: var(--forest); margin: 0; line-height: 1.12; }
+h1 { font-size: 62px; }
+h2 { font-size: 42px; margin-bottom: 22px; position: relative; }
+h3 { font-size: 21px; margin-bottom: 6px; }
+p { margin: 0 0 12px; font-size: 18px; line-height: 1.5; }
+.small { font-size: 15px; color: var(--soft); }
+.tiny { font-size: 12.5px; color: var(--soft); }
+.mono { font-family: var(--mono); }
+ul.clean { margin: 0; padding-left: 20px; font-size: 17px; line-height: 1.5; }
+ul.clean li { margin-bottom: 8px; }
+b.o { color: var(--orange); } b.b { color: var(--blue); }
+
+.cols { display: grid; gap: 34px; }
+.c2 { grid-template-columns: 1fr 1fr; }
+.c55 { grid-template-columns: 1.05fr .95fr; }
+.c64 { grid-template-columns: 1.25fr .75fr; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(31,46,42,.05), 0 8px 22px rgba(31,46,42,.06); }
+.dark { background: var(--forest); color: #DCE8E1; border: 0; }
+.dark h3 { color: #fff; } .dark p { color: #DCE8E1; }
+.tag { display: inline-block; font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--euc); margin-bottom: 6px; }
+.formula { font-family: var(--mono); font-size: 17px; background: #EEF4F0; border-left: 3px solid var(--euc); padding: 10px 14px; border-radius: 8px; margin: 8px 0 12px; color: var(--forest); }
+.lab { background: #EEF4F0; border-left: 3px solid var(--orange); border-radius: 8px; padding: 10px 14px; font-size: 15px; margin-top: 10px; }
+.lab strong { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #B9774B; display: block; margin-bottom: 2px; }
+
+/* title slide */
+.title-slide { background: var(--forest); color: #fff; display: none; }
+.title-slide.active { display: flex; flex-direction: column; justify-content: center; }
+.title-slide h1 { color: #fff; max-width: 900px; }
+.title-slide .eyebrow { color: var(--sage); }
+.title-slide p { color: #C9D8D0; font-size: 20px; max-width: 760px; }
+.title-slide .ghost { -webkit-text-stroke: 1.5px #2f453e; font-size: 340px; top: auto; bottom: -40px; right: 30px; }
+.title-slide .who { margin-top: 30px; font-family: var(--mono); font-size: 14px; color: var(--sage); letter-spacing: .06em; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.chips span { border: 1px solid #3c574e; color: #DCE8E1; border-radius: 999px; padding: 6px 14px; font-size: 14px; }
+
+/* svg helpers */
+svg text { font-family: var(--sans); }
+.node { fill: #fff; stroke: var(--forest); stroke-width: 2; }
+.node.in { fill: var(--mist); }
+.node.out { fill: var(--forest); }
+.edge { stroke: #C3D3CA; stroke-width: 1.4; }
+.pulse { fill: var(--orange); }
+.lbl { font-size: 15px; fill: var(--forest); font-weight: 600; }
+.sub { font-size: 12.5px; fill: var(--soft); }
+
+/* playground tiles */
+.tiles { display: grid; gap: 14px; }
+.t4 { grid-template-columns: repeat(4, 1fr); }
+.t3 { grid-template-columns: repeat(3, 1fr); }
+.tile { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.tile img { width: 100%; display: block; }
+.tile .cap { padding: 8px 10px 10px; font-size: 13px; line-height: 1.35; }
+.tile .cap b { display: block; font-size: 14px; color: var(--forest); }
+.tile .cap .loss { font-family: var(--mono); font-size: 12.5px; color: var(--euc); }
+.tile.bad .cap .loss { color: #B9574B; }
+
+/* activation chart */
+.actgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.act { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+.act h3 { font-size: 18px; }
+.act .eq { font-family: var(--mono); font-size: 12.5px; color: var(--soft); margin-bottom: 4px; }
+
+/* gradient descent widget */
+.gd-controls { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.gd-controls button {
+  font: inherit; font-size: 14px; border: 1.5px solid var(--forest); background: transparent; color: var(--forest);
+  padding: 7px 14px; border-radius: 999px; cursor: pointer;
+}
+.gd-controls button.on { background: var(--forest); color: #fff; }
+
+/* loop */
+.loop text { font-family: var(--sans); }
+
+.refs p { font-size: 15.5px; padding-left: 30px; text-indent: -30px; margin-bottom: 10px; line-height: 1.45; }
+
+/* help */
+.hint { position: fixed; right: 16px; bottom: 60px; z-index: 12; font-size: 12px; color: #9fb5ab; font-family: var(--mono); }
+
+/* ---------- print / PDF: one slide per landscape page ---------- */
+@media print {
+  @page { size: 13.333in 7.5in; margin: 0; }
+  html, body { height: auto; overflow: visible; background: #fff; }
+  .bar, .nav, .progress, .hint { display: none !important; }
+  .viewport { position: static; display: block; }
+  .stage { transform: none !important; width: 13.333in; height: auto; }
+  .slide, .title-slide { display: block !important; position: relative; width: 13.333in; height: 7.5in; border-radius: 0; box-shadow: none; page-break-after: always; break-after: page; animation: none; zoom: 1.0; }
+  .title-slide { display: flex !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

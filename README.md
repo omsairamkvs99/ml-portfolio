@@ -4,7 +4,7 @@ Weekly machine learning portfolio artifacts for my MS in Artificial Intelligence
 
 Live site: https://omsairamkvs99.github.io/ml-portfolio/
 
-Main AI/ML portfolio: https://omsairamkvs99.github.io/
+Previous AI/ML portfolio: https://omsairamkvs99.github.io/
 
 ## Artifacts
 

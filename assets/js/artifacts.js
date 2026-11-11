@@ -26,5 +26,16 @@ const ARTIFACTS = [
     tools: ["HTML", "CSS", "JavaScript", "SVG", "TensorFlow Playground"],
     link: "artifacts/02-neural-network-components/",
     status: "live"
+  },
+  {
+    number: "03",
+    week: "Week 3",
+    category: "Generative AI Infrastructure",
+    title: "What It Really Takes to Train a Large Language Model",
+    summary:
+      "An interactive infographic and downloadable poster on how LLMs like GPT, Llama, Gemini, Claude, and Grok are trained, with real figures for data, compute, energy, and time, a model comparison, and a training cost calculator.",
+    tools: ["HTML", "CSS", "JavaScript", "SVG", "Data Research"],
+    link: "artifacts/03-llm-training-costs/",
+    status: "live"
   }
 ];

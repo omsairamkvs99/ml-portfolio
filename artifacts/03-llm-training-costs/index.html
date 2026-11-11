@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Cost of Training an LLM | Vijay Sai Kilari</title>
-  <meta name="description" content="An infographic on how large language models like GPT, Llama, Gemini, Claude, and Grok are trained, and what that training costs in data, compute, energy, and time.">
+  <title>Beyond the Known | Vijay Sai Kilari</title>
+  <meta name="description" content="An interactive infographic on how large language models like GPT, Llama, Gemini, Claude, and Grok are trained, and what that training costs in data, compute, energy, and time.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@300;400;500;600&family=Unbounded:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <svg id="sky" aria-hidden="true"></svg>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
       <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-        <rect width="6" height="6" fill="#ffffff"/><line x1="0" y1="0" x2="0" y2="6" stroke="#2F6B57" stroke-width="3"/>
+        <rect width="6" height="6" fill="#03050A"/><line x1="0" y1="0" x2="0" y2="6" stroke="#D9BE93" stroke-width="2.4"/>
       </pattern>
     </defs>
   </svg>
@@ -23,87 +24,119 @@
     <div class="wrap">
       <a class="back" href="../../">&larr; All artifacts</a>
       <nav class="topnav">
-        <a href="#pipeline">Pipeline</a>
-        <a href="#resources">Resources</a>
-        <a href="#models">Models</a>
-        <a href="#calculator">Calculator</a>
-        <a href="#sources">Sources</a>
+        <a href="#sequence">Sequence</a>
+        <a href="#chart">Star chart</a>
+        <a href="#resources">Instruments</a>
+        <a href="#models">Signals</a>
+        <a href="#calculator">Simulate</a>
+        <a href="#questions">Unknowns</a>
       </nav>
-      <a class="btn solid" href="poster.pdf" download>Download poster (PDF)</a>
+      <a class="btn" href="poster.pdf" download>Poster PDF</a>
     </div>
   </header>
 
+  <main>
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <div class="ghost" aria-hidden="true">03</div>
-      <p class="eyebrow">Artifact 03 &middot; Generative AI Infrastructure</p>
-      <h1>What It Really Takes to Train a Large Language Model</h1>
-      <p class="lead">
-        Behind every chatbot answer is a training run that consumed trillions of words, tens of thousands of chips,
-        and enough electricity to power a small town. This page follows that process from raw data to deployment
-        and puts real numbers on each resource, using GPT, Llama, Gemini, Claude, and Grok as examples.
-      </p>
-      <div class="hero-grid">
-        <div class="stats">
-          <div class="stat"><b>2.4&times;</b><span>yearly growth in the cost of training frontier models since 2016</span><small>Cottier et al., 2024</small></div>
-          <div class="stat"><b>15.6T</b><span>tokens of text used to pretrain Llama 3.1 405B</span><small>Llama Team, 2024</small></div>
-          <div class="stat"><b>16,384</b><span>H100 GPUs running in parallel for that single training run</span><small>Llama Team, 2024</small></div>
-          <div class="stat"><b>310 GWh</b><span>estimated electricity to train Grok 4, about 28,700 US homes for a year</span><small>Epoch AI, 2025; EIA</small></div>
-        </div>
-        <div class="card chart" id="chart-cost">
-          <h4>Estimated training cost, 2017 to 2025</h4>
-          <p class="sub">Compute cost in US dollars on a log scale. Each step on the axis is ten times the last.</p>
-          <svg viewBox="0 0 560 300" role="img" aria-labelledby="costTitle"><title id="costTitle">Bar chart of estimated training costs from the Transformer at about 930 dollars to Grok 4 at about 490 million dollars</title></svg>
-          <div class="legend-row"><span><i class="solid"></i>Published estimate (AI Index, Epoch AI)</span><span><i class="hatch"></i>My estimate from published GPU hours</span></div>
-        </div>
+      <svg class="eclipse" viewBox="0 0 640 640" aria-hidden="true">
+        <defs>
+          <radialGradient id="corona" cx="50%" cy="50%" r="50%">
+            <stop offset="0.52" stop-color="#A8DDEB" stop-opacity="0"/>
+            <stop offset="0.565" stop-color="#A8DDEB" stop-opacity=".55"/>
+            <stop offset="0.6" stop-color="#7EA9D6" stop-opacity=".22"/>
+            <stop offset="0.75" stop-color="#5B5FA8" stop-opacity=".08"/>
+            <stop offset="1" stop-color="#03050A" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="flare" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#ffffff"/><stop offset=".25" stop-color="#DDF4FA" stop-opacity=".7"/><stop offset="1" stop-color="#A8DDEB" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#E6F7FB" stop-opacity=".95"/><stop offset=".45" stop-color="#A8DDEB" stop-opacity=".25"/><stop offset="1" stop-color="#A8DDEB" stop-opacity=".05"/>
+          </linearGradient>
+        </defs>
+        <circle cx="320" cy="320" r="318" fill="url(#corona)"/>
+        <circle cx="320" cy="320" r="182" fill="#020308"/>
+        <circle cx="320" cy="320" r="182" fill="none" stroke="url(#rim)" stroke-width="1.6"/>
+        <circle cx="320" cy="320" r="236" fill="none" stroke="#A8DDEB" stroke-opacity=".08"/>
+        <circle cx="320" cy="320" r="290" fill="none" stroke="#A8DDEB" stroke-opacity=".05" stroke-dasharray="2 8"/>
+        <circle cx="196" cy="187" r="26" fill="url(#flare)"/><circle cx="196" cy="187" r="2.4" fill="#fff"/>
+      </svg>
+      <p class="eyebrow">Observation log 03 &middot; Vijay Sai Kilari</p>
+      <h1>Beyond<span>the known</span></h1>
+      <p class="sub">What it really takes to train a large language model</p>
+      <p class="lede">What it costs to bring a model like GPT, Llama, Gemini, Claude, or Grok into existence, measured in <b>data</b>, <b>compute</b>, <b>energy</b>, and <b>time</b>. Some of it has been charted. Most of it is still dark.</p>
+      <div class="coords">FIELD &middot; GENERATIVE AI INFRASTRUCTURE<br>OBJECTS &middot; GPT &middot; LLAMA &middot; GEMINI &middot; CLAUDE &middot; GROK<br>EPOCH &middot; 2017 &rarr; UNKNOWN</div>
+    </div>
+    <div class="wrap">
+      <div class="tele">
+        <div><span class="k">Cost growth</span><b>2.4&times; / yr</b><span class="d">growth in frontier training cost since 2016</span><small>Cottier et al., 2024</small></div>
+        <div><span class="k">Data</span><b>15.6T</b><span class="d">tokens used to pretrain Llama 3.1 405B</span><small>Llama Team, 2024</small></div>
+        <div><span class="k">Compute</span><b>16,384</b><span class="d">H100 GPUs running that single training run</span><small>Llama Team, 2024</small></div>
+        <div><span class="k">Energy</span><b>310 GWh</b><span class="d">estimated for Grok 4, about 28,700 US homes for a year</span><small>Epoch AI, 2025; EIA</small></div>
       </div>
     </div>
   </section>
 
-  <!-- PIPELINE -->
-  <section class="section alt" id="pipeline">
+  <!-- 01 SEQUENCE -->
+  <section class="section" id="sequence">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Part 1 &middot; The training process</p>
-        <h2><span class="secnum">01</span>From raw text to a deployed model</h2>
-        <p>Training an LLM happens in stages. The meters on each step show how heavily it draws on each resource, from one bar (light) to four bars (dominant). Pretraining is where most of the compute, energy, and money goes, but the steps around it decide whether the model is actually useful and safe.</p>
+        <div class="sh"><span class="n">01</span><h2>Launch sequence</h2></div>
+        <p>Eight stages take raw text to a deployed model. The meters show how heavily each stage draws on each resource, from one bar to four. Nearly all of the compute, energy, and time is spent at stage four.</p>
       </div>
       <div class="pipeline" id="pipeline-mount"></div>
     </div>
   </section>
 
-  <!-- RESOURCES -->
+  <!-- 02 STAR CHART -->
+  <section class="section" id="chart">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="sh"><span class="n">02</span><h2>Star chart of known models</h2></div>
+        <p>Each point is a frontier model, placed by release year and estimated training cost. The cost scale is logarithmic, so every gridline is ten times the one below. Hover a point for its source. Past 2025, the map goes dark.</p>
+      </div>
+      <div class="panel chart">
+        <div class="starwrap"><svg id="star" viewBox="0 0 1100 560" role="img" aria-label="Scatter chart of estimated training cost by release year, from the Transformer at about 930 dollars in 2017 to Grok 4 at about 490 million dollars in 2025, with a projection past 1 billion dollars by 2027"></svg></div>
+        <div class="legend-row">
+          <span><svg width="18" height="18"><circle cx="9" cy="9" r="5.5" fill="none" stroke="#A8DDEB" stroke-width="1.5"/><circle cx="9" cy="9" r="1.8" fill="#A8DDEB"/></svg>Published third party estimate</span>
+          <span><svg width="18" height="18"><rect x="4.5" y="4.5" width="9" height="9" transform="rotate(45 9 9)" fill="none" stroke="#D9BE93" stroke-width="1.5"/></svg>My estimate from GPU hours the developer disclosed</span>
+          <span><svg width="18" height="18"><line x1="9" y1="1" x2="9" y2="17" stroke="#A8DDEB" stroke-width="1.5" stroke-dasharray="1.5 3"/></svg>Executive statement, shown as a range</span>
+          <span><svg width="18" height="18"><circle cx="9" cy="9" r="6" fill="none" stroke="#566171" stroke-width="1.2" stroke-dasharray="2 2"/></svg>Cost never disclosed</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 INSTRUMENTS -->
   <section class="section" id="resources">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Part 2 &middot; The resources</p>
-        <h2><span class="secnum">02</span>Where the money and energy go</h2>
-        <p>Four resources set the price of a model: data, compute, energy, and time, with people running through all of them. Each one also shapes how capable the final model is.</p>
+        <div class="sh"><span class="n">03</span><h2>Instrument readings</h2></div>
+        <p>Four resources set the price of a model: data, compute, energy, and time, with people running through all of them. Each one also shapes how capable the final model becomes.</p>
       </div>
 
-      <!-- DATA -->
       <div class="res">
         <div class="side">
-          <span class="tag">Resource 1</span>
+          <span class="k">Resource 1</span>
           <h3>Data</h3>
-          <p>Models learn from text measured in tokens, pieces of words. Training sets have grown about fifty times in four years, and the best text is increasingly licensed rather than free.</p>
-          <div class="why"><b>Impact on the model:</b> more and cleaner data improves knowledge and reasoning, and the mix decides what the model is good at.</div>
+          <p>Models learn from text measured in tokens, pieces of words. Training sets grew about fifty times in four years, and the best text is increasingly licensed rather than free.</p>
+          <div class="why"><b>Effect on the model:</b> more and cleaner data improves knowledge and reasoning, and the mix decides what the model is good at.</div>
         </div>
         <div class="body">
-          <div class="card chart" id="chart-tokens">
+          <div class="panel chart" id="chart-tokens">
             <h4>Training tokens</h4>
             <p class="sub">Trillions of tokens, published by the developers</p>
             <svg viewBox="0 0 360 170" role="img" aria-label="Bar chart: GPT-3 0.3 trillion tokens, Llama 2 2 trillion, Llama 3.1 15.6 trillion"></svg>
           </div>
-          <div class="card chart">
+          <div class="panel chart">
             <h4>What went into Llama 3</h4>
             <p class="sub">Share of the pretraining data mix</p>
             <div class="mix" role="img" aria-label="General knowledge 50 percent, math and reasoning 25 percent, code 17 percent, multilingual 8 percent">
               <div style="flex:50;background:var(--s1)">50%</div>
               <div style="flex:25;background:var(--s2)">25%</div>
               <div style="flex:17;background:var(--s3)">17%</div>
-              <div class="dark-text" style="flex:8;background:var(--s4)">8%</div>
+              <div style="flex:8;background:var(--s4)">8%</div>
             </div>
             <div class="legend-row">
               <span><i style="background:var(--s1)"></i>General knowledge</span>
@@ -116,31 +149,30 @@
         </div>
       </div>
 
-      <!-- COMPUTE -->
       <div class="res">
         <div class="side">
-          <span class="tag">Resource 2</span>
+          <span class="k">Resource 2</span>
           <h3>Compute</h3>
-          <p>Training compute is roughly 6 &times; parameters &times; tokens floating point operations. That math runs on thousands of GPUs or TPUs wired together, and the chips are the single largest line item.</p>
-          <div class="why"><b>Impact on the model:</b> more compute allows bigger models trained on more data, which is the main driver of capability gains.</div>
+          <p>Training compute is roughly 6 &times; parameters &times; tokens floating point operations, run on thousands of GPUs or TPUs wired together. The chips are the single largest line item.</p>
+          <div class="why"><b>Effect on the model:</b> more compute allows bigger models trained on more data, the main driver of capability gains.</div>
         </div>
         <div class="body">
-          <div class="mini-stats wide">
-            <div class="stat"><b>~10,000</b><span>NVIDIA V100 GPUs for GPT-3 (2020)</span><small>Patterson et al., 2021</small></div>
-            <div class="stat"><b>16,384</b><span>NVIDIA H100 GPUs for Llama 3.1 405B (2024)</span><small>Llama Team, 2024</small></div>
-            <div class="stat"><b>~100,000</b><span>H100 GPUs in xAI's Colossus cluster for Grok 3 (2025)</span><small>Tom's Hardware, 2025</small></div>
+          <div class="readouts wide">
+            <div><span class="k">2020</span><b>~10,000</b><span>NVIDIA V100 GPUs for GPT-3</span><small>Patterson et al., 2021</small></div>
+            <div><span class="k">2024</span><b>16,384</b><span>NVIDIA H100 GPUs for Llama 3.1 405B</span><small>Llama Team, 2024</small></div>
+            <div><span class="k">2025</span><b>~100,000</b><span>H100 GPUs in xAI's Colossus cluster for Grok 3</span><small>Tom's Hardware, 2025</small></div>
           </div>
-          <div class="card">
+          <div class="panel">
             <h4>Compute used in training</h4>
-            <ul class="split" style="margin-top:8px;">
+            <ul class="split">
               <li><span>GPT-3 (175B parameters)</span><b>3.14 &times; 10&sup2;&sup3; FLOPs</b></li>
               <li><span>Llama 3.1 405B</span><b>3.8 &times; 10&sup2;&#8309; FLOPs</b></li>
               <li><span>Increase in four years</span><b>about 120&times;</b></li>
             </ul>
           </div>
-          <div class="card">
-            <h4>How a frontier training budget splits</h4>
-            <ul class="split" style="margin-top:8px;">
+          <div class="panel">
+            <h4>How a frontier budget splits</h4>
+            <ul class="split">
               <li><span>AI accelerator chips</span><b>tens of millions $</b></li>
               <li><span>Research and engineering staff</span><b>tens of millions $</b></li>
               <li><span>Other server components</span><b>15 to 22%</b></li>
@@ -152,28 +184,27 @@
         </div>
       </div>
 
-      <!-- ENERGY -->
       <div class="res">
         <div class="side">
-          <span class="tag">Resource 3</span>
+          <span class="k">Resource 3</span>
           <h3>Energy</h3>
           <p>Every GPU draws hundreds of watts around the clock, plus cooling. Energy is a small share of the dollar cost but the most visible environmental cost, and it is growing fastest in absolute terms.</p>
-          <div class="why"><b>Impact on the model:</b> energy does not make a model smarter by itself, but power and cooling limits now decide how large a cluster can be built.</div>
+          <div class="why"><b>Effect on the model:</b> energy does not make a model smarter by itself, but power and cooling limits now decide how large a cluster can be built.</div>
         </div>
         <div class="body">
-          <div class="card chart wide" id="chart-energy">
+          <div class="panel chart wide" id="chart-energy">
             <h4>Electricity used to train</h4>
             <p class="sub">Log scale. Switch units to see it in household terms.</p>
             <div class="unit-toggle" role="group" aria-label="Energy units">
               <button type="button" class="on" data-unit="mwh">Megawatt hours</button>
-              <button type="button" data-unit="homes">US homes powered for a year</button>
+              <button type="button" data-unit="homes">US homes for a year</button>
             </div>
             <svg viewBox="0 0 760 230" role="img" aria-label="Bar chart of training electricity: GPT-3 1,287 MWh, Llama 2 family about 1,325 MWh, Llama 3.1 405B about 21,600 MWh, Grok 4 about 310,000 MWh"></svg>
             <div class="legend-row"><span><i class="solid"></i>Published estimate</span><span><i class="hatch"></i>My estimate: GPU hours &times; GPU power (excludes cooling)</span></div>
           </div>
-          <div class="card wide">
+          <div class="panel wide">
             <h4>Reported training emissions</h4>
-            <ul class="split" style="margin-top:8px;">
+            <ul class="split">
               <li><span>GPT-3</span><b>552 t CO&#8322;e</b></li>
               <li><span>Llama 2, all sizes (100% offset by Meta)</span><b>539 t CO&#8322;e</b></li>
               <li><span>Llama 3.1 405B, location based (market based: 0)</span><b>8,930 t CO&#8322;e</b></li>
@@ -183,59 +214,56 @@
         </div>
       </div>
 
-      <!-- TIME -->
       <div class="res">
         <div class="side">
-          <span class="tag">Resource 4</span>
+          <span class="k">Resource 4</span>
           <h3>Time and people</h3>
-          <p>A frontier run ties up a cluster for weeks to months, and hardware fails constantly at that scale. Around the run sit teams of researchers, engineers, and human raters whose salaries rival the chip bill.</p>
-          <div class="why"><b>Impact on the model:</b> longer runs on more data improve quality, while human feedback is what turns a raw text predictor into a helpful assistant.</div>
+          <p>A frontier run ties up a cluster for weeks to months, and hardware fails constantly at that scale. Around the run sit researchers, engineers, and human raters whose salaries rival the chip bill.</p>
+          <div class="why"><b>Effect on the model:</b> longer runs on more data improve quality, while human feedback turns a raw text predictor into a helpful assistant.</div>
         </div>
         <div class="body">
-          <div class="mini-stats wide">
-            <div class="stat"><b>14.8 days</b><span>to train GPT-3</span><small>Patterson et al., 2021</small></div>
-            <div class="stat"><b>466</b><span>job interruptions in a 54 day stretch of Llama 3 pretraining, about one every 3 hours</span><small>Llama Team, 2024</small></div>
-            <div class="stat"><b>~40</b><span>contractors who wrote and ranked responses for InstructGPT's human feedback</span><small>Ouyang et al., 2022</small></div>
+          <div class="readouts wide">
+            <div><span class="k">GPT-3</span><b>14.8 days</b><span>of training</span><small>Patterson et al., 2021</small></div>
+            <div><span class="k">Llama 3</span><b>466</b><span>job interruptions in a 54 day stretch of pretraining, about one every 3 hours</span><small>Llama Team, 2024</small></div>
+            <div><span class="k">InstructGPT</span><b>~40</b><span>contractors who wrote and ranked responses for human feedback</span><small>Ouyang et al., 2022</small></div>
+          </div>
+          <div class="panel wide chart">
+            <h4>Every interruption in 54 days of Llama 3 pretraining</h4>
+            <p class="sub">Each line is one interruption. Sand lines are the 47 planned ones; the other 419 were unexpected, most of them hardware failures. Line positions are illustrative.</p>
+            <svg id="interrupts" class="interrupts" viewBox="0 0 1000 70" role="img" aria-label="466 interruption marks spread across a 54 day timeline"></svg>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MODELS -->
-  <section class="section alt" id="models">
+  <!-- 04 SIGNALS -->
+  <section class="section" id="models">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Part 3 &middot; Real models</p>
-        <h2><span class="secnum">03</span>What we know about specific models</h2>
-        <p>The biggest finding from my research: how much each company discloses varies enormously. Meta publishes GPU hours and emissions. OpenAI, Google, Anthropic, and xAI share little, so many figures come from outside estimates. Each card is labeled by where its numbers come from.</p>
-      </div>
-      <div class="key">
-        <span class="badge b-disclosed">Disclosed</span> developer published the figures
-        <span class="badge b-estimate">Estimate</span> third party estimate
-        <span class="badge b-statement">Statement</span> executive comment only
+        <div class="sh"><span class="n">04</span><h2>Signal strength</h2></div>
+        <p>How much each developer has revealed about training. Only Meta transmits clearly. For the rest, the numbers come from outside estimates or a single comment, so read them as faint signals.</p>
       </div>
       <div class="models" id="models-mount"></div>
     </div>
   </section>
 
-  <!-- CALCULATOR -->
+  <!-- 05 CALCULATOR -->
   <section class="section" id="calculator">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Part 4 &middot; Try it</p>
-        <h2><span class="secnum">04</span>Training cost calculator</h2>
-        <p>Pick a model size and dataset, choose the hardware, and the calculator estimates compute, time, cost, and energy using the standard 6 &times; parameters &times; tokens rule. The presets let you check the estimate against what Meta and OpenAI actually reported.</p>
+        <div class="sh"><span class="n">05</span><h2>Run a simulation</h2></div>
+        <p>Pick a model size and dataset, choose the hardware, and estimate the compute, time, cost, and energy using the standard 6 &times; parameters &times; tokens rule. The presets let you check the estimate against what Meta and OpenAI actually reported.</p>
       </div>
       <div class="calc">
-        <form id="calc-form" class="card" onsubmit="return false;">
+        <form id="calc-form" class="panel" onsubmit="return false;">
           <div>
-            <div class="tiny" style="margin-bottom:6px;font-weight:600;color:var(--forest)">Presets</div>
+            <div class="k" style="margin-bottom:8px">Presets</div>
             <div class="presets" id="presets"></div>
           </div>
           <div class="row2">
             <label>Parameters <small>billions</small><input id="in-params" type="number" min="0.1" step="any" value="405"></label>
-            <label>Training tokens <small>billions</small><input id="in-tokens" type="number" min="1" step="any" value="15600"></label>
+            <label>Tokens <small>billions</small><input id="in-tokens" type="number" min="1" step="any" value="15600"></label>
           </div>
           <label>GPU type
             <select id="in-gpu">
@@ -245,23 +273,23 @@
             </select>
           </label>
           <div class="row2">
-            <label>Number of GPUs<input id="in-gpus" type="number" min="1" step="1" value="16384"></label>
-            <label>Utilization (MFU) <small>% of peak</small><input id="in-mfu" type="number" min="5" max="80" step="1" value="40"></label>
+            <label>GPUs<input id="in-gpus" type="number" min="1" step="1" value="16384"></label>
+            <label>Utilization <small>% of peak (MFU)</small><input id="in-mfu" type="number" min="5" max="80" step="1" value="40"></label>
           </div>
           <div class="row2">
-            <label>Price per GPU hour <small>US $</small><input id="in-price" type="number" min="0" step="0.05" value="2.50"></label>
-            <label>Data center overhead <small>PUE</small><input id="in-pue" type="number" min="1" max="2" step="0.05" value="1.1"></label>
+            <label>$ per GPU hour<input id="in-price" type="number" min="0" step="0.05" value="2.50"></label>
+            <label>Overhead <small>PUE</small><input id="in-pue" type="number" min="1" max="2" step="0.05" value="1.1"></label>
           </div>
         </form>
         <div>
           <div class="out">
-            <div class="stat hero-out"><b id="o-cost">$0</b><span>estimated compute cost</span></div>
-            <div class="stat"><b id="o-flops">0</b><span>total FLOPs</span></div>
-            <div class="stat"><b id="o-hours">0</b><span>GPU hours</span></div>
-            <div class="stat"><b id="o-days">0</b><span>days on this cluster</span></div>
-            <div class="stat"><b id="o-mwh">0</b><span>megawatt hours of electricity</span></div>
-            <div class="stat"><b id="o-homes">0</b><span>US homes powered for a year</span></div>
-            <div class="stat"><b id="o-tpp">0</b><span>tokens per parameter</span></div>
+            <div class="hero-out"><span class="k">Estimated compute cost</span><b id="o-cost">$0</b></div>
+            <div><b id="o-flops">0</b><span>total FLOPs</span></div>
+            <div><b id="o-hours">0</b><span>GPU hours</span></div>
+            <div><b id="o-days">0</b><span>days on this cluster</span></div>
+            <div><b id="o-mwh">0</b><span>megawatt hours</span></div>
+            <div><b id="o-homes">0</b><span>US homes for a year</span></div>
+            <div><b id="o-tpp">0</b><span>tokens per parameter</span></div>
           </div>
           <div class="compare" id="compare"></div>
           <div class="formula">
@@ -275,19 +303,23 @@
     </div>
   </section>
 
-  <!-- TAKEAWAYS -->
-  <section class="section alt" id="takeaways">
+  <!-- 06 QUESTIONS -->
+  <section class="section" id="questions">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Part 5 &middot; So what</p>
-        <h2><span class="secnum">05</span>Key takeaways</h2>
+        <div class="sh"><span class="n">06</span><h2>Open questions</h2></div>
+        <p>The numbers so far point toward a future no one has measured yet.</p>
       </div>
-      <div class="takes">
-        <div class="take"><b>Pretraining dominates the bill.</b><p>It is the step that consumes most of the chips, energy, and calendar time. Every other step is cheap by comparison.</p></div>
-        <div class="take"><b>Costs grow faster than budgets.</b><p>At 2.4&times; a year, the largest runs are projected to pass $1 billion by 2027, limiting frontier training to a handful of companies.</p></div>
-        <div class="take"><b>Energy is the hidden constraint.</b><p>It is only 2 to 6% of the dollars, but power and cooling now limit where clusters can be built and carry real environmental costs.</p></div>
-        <div class="take"><b>Transparency is uneven.</b><p>Only Meta publishes detailed training numbers. For investment or policy decisions, most figures are still estimates that should be treated with care.</p></div>
-        <div class="take"><b>For most organizations, build on, do not train.</b><p>Fine tuning or retrieval on top of an existing model costs a tiny fraction of pretraining, which is how most enterprises actually adopt LLMs.</p></div>
+      <div class="qs">
+        <div class="q"><div class="qn">?01</div><b>When does the data run out?</b><p>Models may be trained on the entire stock of public human text sometime between 2026 and 2032.</p><small>Villalobos et al., 2024</small></div>
+        <div class="q"><div class="qn">?02</div><b>Who can afford the next one?</b><p>At 2.4&times; a year, the largest training runs pass $1 billion by 2027, leaving very few organizations able to build at the frontier.</p><small>Cottier et al., 2024</small></div>
+        <div class="q"><div class="qn">?03</div><b>Where will the power come from?</b><p>Energy is only 2 to 6% of the cost, yet power and cooling now decide where clusters can be built at all. Grok 4 alone is estimated at 310 GWh.</p><small>Cottier et al., 2024; Epoch AI, 2025</small></div>
+        <div class="q"><div class="qn">?04</div><b>How much stays hidden?</b><p>Of the seven frontier models charted here, only Meta's come with full training numbers. The rest are estimates or comments.</p><small>Signal strength, above</small></div>
+      </div>
+      <div class="known">
+        <div><span class="k">What we do know</span><b>Pretraining dominates the bill.</b>It consumes most of the chips, energy, and calendar time.</div>
+        <div><span class="k">&nbsp;</span><b>Costs compound every year.</b>Frontier training is concentrating in a handful of companies.</div>
+        <div><span class="k">&nbsp;</span><b>Build on, don't create.</b>Fine tuning or retrieval on an existing model costs a tiny fraction of training one.</div>
       </div>
     </div>
   </section>
@@ -295,32 +327,34 @@
   <!-- SOURCES -->
   <section class="section" id="sources">
     <div class="wrap">
-      <div class="section-head"><p class="eyebrow">Sources</p><h2 style="font-size:28px;">References</h2></div>
+      <div class="section-head"><div class="sh"><span class="n">07</span><h2>References</h2></div></div>
       <div class="refs">
         <p>Amodei, D. (2025, January 29). <em>On DeepSeek and export controls</em>. https://darioamodei.com/on-deepseek-and-export-controls</p>
         <p>Bai, Y., Kadavath, S., Kundu, S., Askell, A., Kernion, J., Jones, A., et al. (2022). <em>Constitutional AI: Harmlessness from AI feedback</em>. arXiv. https://doi.org/10.48550/arXiv.2212.08073</p>
         <p>Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., et al. (2020). Language models are few-shot learners. <em>Advances in Neural Information Processing Systems, 33</em>, 1877-1901.</p>
         <p>Cottier, B., Rahman, R., Fattorini, L., Maslej, N., Besiroglu, T., &amp; Owen, D. (2024). <em>The rising costs of training frontier AI models</em>. arXiv. https://doi.org/10.48550/arXiv.2405.21015</p>
+        <p><em>Elon Musk confirms that Grok 3 is coming soon: Pretraining took 10X more compute power than Grok 2 on 100,000 Nvidia H100 GPUs</em>. (2025, January 6). Tom's Hardware. https://www.tomshardware.com/tech-industry/artificial-intelligence/elon-musk-confirms-that-grok-3-is-coming-soon-pretraining-took-10x-more-compute-power-than-grok-2-on-100-000-nvidia-h100-gpus</p>
         <p>Epoch AI. (2025, September 12). <em>Grok 4 training resources</em>. https://epoch.ai/data-insights/grok-4-training-resources</p>
         <p>Gemini Team, Google. (2023). <em>Gemini: A family of highly capable multimodal models</em>. arXiv. https://doi.org/10.48550/arXiv.2312.11805</p>
         <p>Llama Team, AI @ Meta. (2024). <em>The Llama 3 herd of models</em>. arXiv. https://doi.org/10.48550/arXiv.2407.21783</p>
         <p>Maslej, N., Fattorini, L., Perrault, R., Parli, V., Reuel, A., Brynjolfsson, E., et al. (2024). <em>The AI Index 2024 annual report</em>. Stanford Institute for Human-Centered AI. https://hai.stanford.edu/ai-index/2024-ai-index-report</p>
         <p>Meta. (2023). <em>Llama 2 model card</em>. https://github.com/meta-llama/llama/blob/main/MODEL_CARD.md</p>
         <p>Meta. (2024). <em>Llama 3.1 model card</em>. https://huggingface.co/meta-llama/Llama-3.1-405B</p>
-        <p>Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C. L., Mishkin, P., et al. (2022). Training language models to follow instructions with human feedback. <em>Advances in Neural Information Processing Systems, 35</em>.</p>
+        <p>Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C. L., Mishkin, P., et al. (2022). Training language models to follow instructions with human feedback. <em>Advances in Neural Information Processing Systems, 35</em>, 27730-27744.</p>
         <p>Patterson, D., Gonzalez, J., Le, Q., Liang, C., Munguia, L.-M., Rothchild, D., So, D., Texier, M., &amp; Dean, J. (2021). <em>Carbon emissions and large neural network training</em>. arXiv. https://doi.org/10.48550/arXiv.2104.10350</p>
-        <p><em>Elon Musk confirms that Grok 3 is coming soon: Pretraining took 10X more compute power than Grok 2 on 100,000 Nvidia H100 GPUs</em>. (2025, January 6). Tom's Hardware. https://www.tomshardware.com/tech-industry/artificial-intelligence/elon-musk-confirms-that-grok-3-is-coming-soon-pretraining-took-10x-more-compute-power-than-grok-2-on-100-000-nvidia-h100-gpus</p>
         <p>U.S. Energy Information Administration. (n.d.). <em>How much electricity does an American home use?</em> Retrieved November 11, 2026, from https://www.eia.gov/tools/faqs/faq.php?id=97&amp;t=3</p>
+        <p>Villalobos, P., Ho, A., Sevilla, J., Besiroglu, T., Heim, L., &amp; Hobbhahn, M. (2024). Position: Will we run out of data? Limits of LLM scaling based on human-generated data. <em>Proceedings of the 41st International Conference on Machine Learning</em>, 235, 49523-49544. https://proceedings.mlr.press/v235/villalobos24a.html</p>
         <p>xAI. (2024, March 17). <em>Open release of Grok-1</em>. https://x.ai/news/grok-os</p>
       </div>
-      <p class="note">My own estimates (marked with hatching or "my estimate") multiply published GPU hours by an assumed cloud price or by GPU power draw. They are approximations, not reported figures.</p>
+      <p class="note">My own estimates (marked in sand, with diamonds or hatching) multiply published GPU hours by an assumed cloud price or by GPU power draw. They are approximations, not reported figures.</p>
     </div>
   </section>
+  </main>
 
   <footer class="footer">
     <div class="wrap">
-      <div>&copy; 2026 Vijay Sai Kilari &middot; Applied ML Portfolio &middot; Artifact 03</div>
-      <div class="links"><a href="../../">All artifacts</a><a href="https://omsairamkvs99.github.io/">Main portfolio</a><a href="https://github.com/omsairamkvs99">GitHub</a></div>
+      <div>&copy; 2026 Vijay Sai Kilari &middot; Observation log 03</div>
+      <div><a href="../../">All artifacts</a><a href="https://omsairamkvs99.github.io/">Main portfolio</a><a href="https://github.com/omsairamkvs99">GitHub</a></div>
     </div>
   </footer>
 

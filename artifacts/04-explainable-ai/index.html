@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Opening the Black Box | Vijay Sai Kilari</title>
+  <meta name="description" content="An infographic on explainable AI for large language models: why transparency matters, what makes it hard, how validation and metrics build trust, and what OpenAI, Anthropic, Google, and Meta are doing about it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="back" href="../../">&larr; All artifacts</a>
+      <nav class="topnav">
+        <a href="#why">Why it matters</a>
+        <a href="#challenges">Challenges</a>
+        <a href="#validation">Validation</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#sources">Sources</a>
+      </nav>
+      <span class="tag">Artifact 04</span>
+    </div>
+  </header>
+
+  <main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="tag">Artifact 04 &middot; Explainable AI &middot; Vijay Sai Kilari</span>
+          <h1 style="margin-top:16px">Opening the <em>black box</em></h1>
+          <p class="lede">Large language models like GPT, Claude, Gemini, and Llama now help with medical notes, loan reviews, and legal research. Yet even their builders <b>cannot fully explain why a model gives a particular answer</b>. This page explains what explainable AI is, why it is so hard, how validation and metrics fill the gap, and what the major AI labs are doing to see inside.</p>
+          <button class="xray" type="button" id="xray"><span class="dot"></span><span id="xray-label">X-ray the model</span></button>
+        </div>
+        <div class="cube-box" id="cube">
+          <svg viewBox="0 0 440 400" role="img" aria-label="A black box that turns transparent to reveal a network of neurons inside">
+            <defs>
+              <linearGradient id="gface" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".85"/><stop offset="1" stop-color="#DDE6FB" stop-opacity=".55"/></linearGradient>
+              <linearGradient id="gtop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#E8EEFE"/></linearGradient>
+            </defs>
+            <!-- glass cube -->
+            <polygon points="220,40 380,120 220,200 60,120" fill="url(#gtop)" stroke="#9FB2E8" stroke-width="1.5"/>
+            <polygon points="60,120 220,200 220,370 60,290" fill="url(#gface)" stroke="#9FB2E8" stroke-width="1.5"/>
+            <polygon points="380,120 220,200 220,370 380,290" fill="#EEF2FC" fill-opacity=".7" stroke="#9FB2E8" stroke-width="1.5"/>
+            <g class="inside" id="inside"></g>
+            <!-- black cover -->
+            <g id="cover">
+              <polygon points="220,40 380,120 220,200 60,120" fill="#2A2F3A"/>
+              <polygon points="60,120 220,200 220,370 60,290" fill="#10141C"/>
+              <polygon points="380,120 220,200 220,370 380,290" fill="#1A1F29"/>
+              <text x="220" y="130" text-anchor="middle" fill="#7B8597" font-family="IBM Plex Mono" font-size="34">?</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><b>Millions</b><span>of concepts Anthropic mapped inside Claude 3 Sonnet in 2024</span></div>
+        <div class="hstat"><b>16M</b><span>features OpenAI extracted from GPT-4 with a sparse autoencoder</span></div>
+        <div class="hstat"><b>25%</b><span>of the time Claude 3.7 Sonnet admitted using a hint it relied on</span></div>
+        <div class="hstat"><b>7</b><span>metrics Stanford's HELM uses to judge a language model, not just accuracy</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="layer"><b>LAYER 1</b><span class="tag">The surface</span></span>
+        <h2>What is explainable AI, and <em>why does it matter?</em></h2>
+        <p>An AI system can be accurate and still be impossible to trust if no one can say why it made a decision. Explainability is what turns a confident answer into one that people can check, question, and correct.</p>
+      </div>
+      <div class="define">
+        <div class="card big">
+          <h3>Explainable AI (XAI)</h3>
+          <p>The set of methods that make an AI system's outputs <em>understandable to the people affected by them</em>. NIST's principles say a good explanation should actually be given, be meaningful to its audience, accurately reflect how the system reached its result, and admit the limits of what the system knows.</p>
+          <span class="src" style="color:#8A97B0">Phillips et al., 2021 (NIST IR 8312)</span>
+        </div>
+        <div class="card">
+          <h4>Regulators now expect it</h4>
+          <ul class="reg">
+            <li><b>EU AI Act</b>Since August 2, 2025, providers of general purpose AI models must keep technical documentation and publish a summary of their training content.</li>
+            <li><b>NIST AI Risk Management Framework</b>Lists "explainable and interpretable" and "accountable and transparent" among the characteristics of trustworthy AI.</li>
+          </ul>
+          <span class="src">European Commission, n.d.; NIST, 2023</span>
+        </div>
+      </div>
+      <div class="why">
+        <div class="card"><h3>Healthcare</h3><p>A doctor needs to know why a model flagged a scan or summarized a chart a certain way before acting on it. An unexplained error here can hurt a patient.</p></div>
+        <div class="card"><h3>Finance</h3><p>Lenders must be able to tell an applicant why they were denied credit. "The model said so" is not an acceptable reason, legally or ethically.</p></div>
+        <div class="card"><h3>Law</h3><p>Lawyers have filed briefs with case citations that an AI invented. Transparency and verification are what keep a fluent answer from becoming a false record.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGES -->
+  <section class="section" id="challenges">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="layer"><b>LAYER 2</b><span class="tag">The obstacles</span></span>
+        <h2>Why LLMs are <em>so hard to explain</em></h2>
+        <p>The difficulty is not just size. The way these models store knowledge, the way they explain themselves, and the way companies release them all make transparency harder.</p>
+      </div>
+      <div class="chal" id="chal"></div>
+
+      <div class="card faith">
+        <div>
+          <span class="tag">Spotlight</span>
+          <h3>When a model explains itself, is it telling the truth?</h3>
+          <p>Anthropic gave reasoning models a hidden hint toward an answer, then checked whether the model's step by step reasoning admitted using it. Most of the time, it did not. In a separate study, Claude described the school method for adding 36 + 59 while its internal circuits were actually doing something different.</p>
+          <span class="src">Anthropic, 2025a; Anthropic, 2025b</span>
+        </div>
+        <div>
+          <div class="fbar"><div class="lab">Claude 3.7 Sonnet <span>mentioned the hint</span></div><div class="track"><div class="said" data-w="25">25%</div><div class="hid">75% stayed silent</div></div></div>
+          <div class="fbar"><div class="lab">DeepSeek R1 <span>mentioned the hint</span></div><div class="track"><div class="said" data-w="39">39%</div><div class="hid">61% stayed silent</div></div></div>
+          <p class="note">Averaged across hint types. A chain of thought is useful, but it is not proof of how the model decided.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALIDATION -->
+  <section class="section" id="validation">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="layer"><b>LAYER 3</b><span class="tag">Measuring trust</span></span>
+        <h2>Validation and metrics: <em>trust you can measure</em></h2>
+        <p>Since no one can read a model's mind directly, we judge it by how it behaves on data it has never seen. Validation is the process; metrics are the scorecard.</p>
+      </div>
+      <div class="pipe">
+        <div class="ps"><span class="k">01</span><b>Hold out data</b><span>Keep test data separate so the model is graded on unseen examples</span></div>
+        <div class="ps"><span class="k">02</span><b>Cross validate</b><span>Rotate which data is held out so one lucky split does not mislead</span></div>
+        <div class="ps"><span class="k">03</span><b>Benchmark</b><span>Score against shared test sets so models can be compared fairly</span></div>
+        <div class="ps"><span class="k">04</span><b>Human review</b><span>People rate quality, safety, and helpfulness that numbers miss</span></div>
+        <div class="ps"><span class="k">05</span><b>Red team</b><span>Experts try to make the model fail, leak data, or cause harm</span></div>
+        <div class="ps"><span class="k">06</span><b>Monitor</b><span>Keep measuring after launch, because real use drifts from tests</span></div>
+      </div>
+
+      <div class="card demo">
+        <div>
+          <span class="tag">Try it &middot; Illustration</span>
+          <h3 style="margin-top:6px">One model, one dial, very different scores</h3>
+          <p style="color:var(--soft);font-size:15px;margin:8px 0 0">A model screens 100 loan applications; 30 are truly high risk. Move the threshold to decide how confident the model must be before it flags one. Watch how precision and recall trade off, and why accuracy alone hides the story.</p>
+          <div class="ctrl"><label for="th">Flag threshold <span id="thv">0.50</span></label><input id="th" type="range" min="0.05" max="0.95" step="0.05" value="0.5"></div>
+          <div class="dots" id="dots" aria-hidden="true"></div>
+          <div class="legend-row">
+            <span><i style="background:var(--cobalt)"></i>Caught (true positive)</span>
+            <span><i style="background:var(--orange)"></i>False alarm</span>
+            <span><i style="border:2px solid var(--cobalt);background:#fff"></i>Missed</span>
+            <span><i style="background:#D7DDE8"></i>Correctly cleared</span>
+          </div>
+        </div>
+        <div>
+          <div class="cm" id="cm"></div>
+          <div class="metrics">
+            <div><b id="m-acc">0%</b><span>Accuracy: how often it is right overall</span></div>
+            <div><b id="m-pre">0%</b><span>Precision: of the flags, how many were real</span></div>
+            <div><b id="m-rec">0%</b><span>Recall: of the real risks, how many were caught</span></div>
+          </div>
+          <p class="note">Scores here are simulated for teaching. In lending, a missed risk and a false alarm cost very different things, so the "best" threshold is a human decision, not just a math one.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:36px">Beyond accuracy: Stanford's HELM scorecard</h3>
+      <p style="color:var(--soft);margin:6px 0 0">The Holistic Evaluation of Language Models tests each model on seven measures across many scenarios.</p>
+      <div class="helm">
+        <div><b>Accuracy</b><span>Does it get the right answer?</span></div>
+        <div><b>Calibration</b><span>Does its confidence match how often it is right?</span></div>
+        <div><b>Robustness</b><span>Does it hold up when inputs are reworded or have typos?</span></div>
+        <div><b>Fairness</b><span>Does performance stay steady across groups?</span></div>
+        <div><b>Bias</b><span>Does it lean on stereotypes?</span></div>
+        <div><b>Toxicity</b><span>Does it produce harmful language?</span></div>
+        <div><b>Efficiency</b><span>How much compute and time does it use?</span></div>
+      </div>
+      <span class="src">Liang et al., 2022</span>
+
+      <div class="warn">
+        <div class="card"><h4>Metrics can be fooled by leaked tests</h4><p>OpenAI found parts of several benchmarks, including BIG-bench and GSM-8K, inside GPT-4's training data. A model that has already seen the test will score better than it really is.</p><span class="src">OpenAI, 2023</span></div>
+        <div class="card"><h4>Polish can hurt honesty</h4><p>GPT-4's pretrained model was well calibrated, but post training made it noticeably more overconfident. Calibration is the metric that tells users when to double check.</p><span class="src">OpenAI, 2023</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section class="section" id="solutions">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="layer"><b>LAYER 4</b><span class="tag">Looking inside</span></span>
+        <h2>How the labs are <em>opening the box</em></h2>
+        <p>Explainability techniques range from studying a model from the outside to tracing individual circuits inside it. The deeper the method, the more faithful the explanation, and the more expensive it is to produce.</p>
+      </div>
+      <div class="ladder" id="ladder"></div>
+    </div>
+  </section>
+
+  <!-- TAKEAWAYS -->
+  <section class="section" id="takeaways">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="layer"><b>CORE</b><span class="tag">What it adds up to</span></span>
+        <h2>Trust is <em>built in layers</em></h2>
+      </div>
+      <div class="takes">
+        <div class="take"><b>Explanations are not proof.</b><p>Ask a model why it answered and you get a story. Check that story against evidence before relying on it.</p></div>
+        <div class="take"><b>Measure more than accuracy.</b><p>Calibration, robustness, fairness, and bias reveal problems a single accuracy score hides.</p></div>
+        <div class="take"><b>Inside research is real but early.</b><p>Labs can now find millions of concepts inside models, yet still explain only a fraction of what they compute.</p></div>
+        <div class="take"><b>Keep people in the loop.</b><p>In healthcare, finance, and law, a human who can question the output is still the best safeguard.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section class="section" id="sources">
+    <div class="wrap">
+      <div class="section-head"><span class="layer"><b>REF</b><span class="tag">Sources</span></span><h2>References</h2></div>
+      <div class="refs">
+        <p>Anthropic. (2024, May 21). <em>Mapping the mind of a large language model</em>. https://www.anthropic.com/research/mapping-mind-language-model</p>
+        <p>Anthropic. (2025a). <em>Reasoning models don't always say what they think</em>. https://www.anthropic.com/research/reasoning-models-dont-say-think</p>
+        <p>Anthropic. (2025b, March 27). <em>Tracing the thoughts of a large language model</em>. https://www.anthropic.com/research/tracing-thoughts-language-model</p>
+        <p>Elhage, N., Hume, T., Olsson, C., Schiefer, N., Henighan, T., Kravec, S., et al. (2022). <em>Toy models of superposition</em>. Transformer Circuits Thread. https://transformer-circuits.pub/2022/toy_model/index.html</p>
+        <p>European Commission. (n.d.). <em>General-purpose AI obligations under the AI Act</em>. Retrieved November 17, 2026, from https://digital-strategy.ec.europa.eu/en/factpages/general-purpose-ai-obligations-under-ai-act</p>
+        <p>Google DeepMind. (2024, July 31). <em>Gemma Scope: Helping the safety community shed light on the inner workings of language models</em>. https://deepmind.google/discover/blog/gemma-scope-helping-the-safety-community-shed-light-on-the-inner-workings-of-language-models/</p>
+        <p>Jain, S., &amp; Wallace, B. C. (2019). Attention is not explanation. In <em>Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics</em> (pp. 3543-3556). https://doi.org/10.18653/v1/N19-1357</p>
+        <p>Liang, P., Bommasani, R., Lee, T., et al. (2022). <em>Holistic evaluation of language models</em>. arXiv. https://doi.org/10.48550/arXiv.2211.09110</p>
+        <p>Lundberg, S. M., &amp; Lee, S.-I. (2017). A unified approach to interpreting model predictions. <em>Advances in Neural Information Processing Systems, 30</em>.</p>
+        <p>Meta. (2024). <em>Llama 3.1 model card</em>. https://huggingface.co/meta-llama/Llama-3.1-405B</p>
+        <p>Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji, I. D., &amp; Gebru, T. (2019). Model cards for model reporting. In <em>Proceedings of the Conference on Fairness, Accountability, and Transparency</em> (pp. 220-229). https://doi.org/10.1145/3287560.3287596</p>
+        <p>National Institute of Standards and Technology. (2023). <em>Artificial intelligence risk management framework (AI RMF 1.0)</em> (NIST AI 100-1). https://doi.org/10.6028/NIST.AI.100-1</p>
+        <p>OpenAI. (2023). <em>GPT-4 technical report</em>. arXiv. https://doi.org/10.48550/arXiv.2303.08774</p>
+        <p>OpenAI. (2024, June 6). <em>Extracting concepts from GPT-4</em>. https://openai.com/index/extracting-concepts-from-gpt-4/</p>
+        <p>Phillips, P. J., Hahn, C. A., Fontana, P. C., Yates, A. N., Greene, K., Broniatowski, D. A., &amp; Przybocki, M. A. (2021). <em>Four principles of explainable artificial intelligence</em> (NIST IR 8312). National Institute of Standards and Technology. https://doi.org/10.6028/NIST.IR.8312</p>
+        <p>Ribeiro, M. T., Singh, S., &amp; Guestrin, C. (2016). "Why should I trust you?": Explaining the predictions of any classifier. In <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em> (pp. 1135-1144). https://doi.org/10.1145/2939672.2939778</p>
+        <p>Tufanov, I., Hambardzumyan, K., Ferrando, J., &amp; Voita, E. (2024). LM transparency tool: Interactive tool for analyzing transformer language models. In <em>Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics: System Demonstrations</em>. https://doi.org/10.48550/arXiv.2404.07004</p>
+        <p>Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., Chi, E., Le, Q., &amp; Zhou, D. (2022). Chain-of-thought prompting elicits reasoning in large language models. <em>Advances in Neural Information Processing Systems, 35</em>, 24824-24837.</p>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div>&copy; 2026 Vijay Sai Kilari &middot; Applied ML Portfolio &middot; Artifact 04</div>
+      <div><a href="../../">All artifacts</a><a href="https://omsairamkvs99.github.io/">Main portfolio</a><a href="https://github.com/omsairamkvs99">GitHub</a></div>
+    </div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

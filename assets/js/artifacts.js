@@ -37,5 +37,16 @@ const ARTIFACTS = [
     tools: ["HTML", "CSS", "JavaScript", "SVG", "Data Research"],
     link: "artifacts/03-llm-training-costs/",
     status: "live"
+  },
+  {
+    number: "04",
+    week: "Week 4",
+    category: "Explainable AI",
+    title: "Opening the Black Box: Explainable AI for Large Language Models",
+    summary:
+      "An interactive infographic on why LLMs are hard to explain, how validation and metrics build measurable trust, and how OpenAI, Anthropic, Google, and Meta are working to see inside their models.",
+    tools: ["HTML", "CSS", "JavaScript", "SVG", "Research"],
+    link: "artifacts/04-explainable-ai/",
+    status: "live"
   }
 ];

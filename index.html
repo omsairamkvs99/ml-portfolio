@@ -134,13 +134,18 @@
         var card = document.createElement("article");
         card.className = "acard" + (a.status === "upcoming" ? " upcoming" : "");
         var tags = a.tools.map(function (t) { return "<span>" + t + "</span>"; }).join("");
+        var external = /^https?:\/\//i.test(a.link);
         card.innerHTML =
           '<div class="num" aria-hidden="true">' + a.number + "</div>" +
           '<div class="meta">' + a.week + " &middot; " + a.category + "</div>" +
           "<h3>" + a.title + "</h3>" +
           "<p>" + a.summary + "</p>" +
           (tags ? '<div class="tags">' + tags + "</div>" : "") +
-          (a.status === "live" ? '<a class="btn solid" href="' + a.link + '">Open Artifact</a>' : "");
+          (a.status === "live"
+            ? '<a class="btn solid" href="' + a.link + '"' +
+              (external ? ' target="_blank" rel="noopener"' : "") +
+              '>Open Artifact</a>'
+            : "");
         grid.appendChild(card);
       });
       document.getElementById("year").textContent = new Date().getFullYear();

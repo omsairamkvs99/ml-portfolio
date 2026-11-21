@@ -48,5 +48,16 @@ const ARTIFACTS = [
     tools: ["HTML", "CSS", "JavaScript", "SVG", "Research"],
     link: "artifacts/04-explainable-ai/",
     status: "live"
+  },
+  {
+    number: "05",
+    week: "Week 4 Residency",
+    category: "Computer Vision",
+    title: "Chest X-Ray Pneumonia Classification: ResNet18 vs DenseNet121",
+    summary:
+      "A Streamlit app that runs two fine-tuned convolutional networks on the same chest X-ray and compares their predictions side by side, with the held-out evaluation metrics from the residency project.",
+    tools: ["Python", "PyTorch", "torchvision", "Streamlit"],
+    link: "https://pneumonia-xray-demo-aiml-residency-iwu.streamlit.app/",
+    status: "live"
   }
 ];
